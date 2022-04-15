@@ -4,17 +4,16 @@ const mongoose = require("mongoose");
 const app = express();
 const port = 5000;
 dotenv.config();
-mongoose.connect(
-  process.env.MONGO_URL,
-  {
+mongoose
+  .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
-  },
-  () => {
-    console.log("Mongoose connected!");
-  }
-);
+  })
+  .then(console.log("Connected to MONGODB"))
+  .catch((err) => {
+    console.log(err);
+  });
+
 app.listen(port, () => {
   console.log(`Server listening at port ${port}`);
 });
