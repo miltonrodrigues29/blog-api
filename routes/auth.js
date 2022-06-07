@@ -6,6 +6,7 @@ const { default: mongoose } = require("mongoose");
 //REGISTER
 
 router.post("/register", async (req, res) => {
+  console.log("USER REGISTER API CALLED");
   try {
     const salt = await bcyrpt.genSalt(10);
     const hashedPass = await bcyrpt.hash(req.body.password, salt);
@@ -17,7 +18,6 @@ router.post("/register", async (req, res) => {
     const user = await newUser.save();
     res.status(200).json(user);
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
