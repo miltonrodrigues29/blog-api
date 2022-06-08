@@ -23,6 +23,7 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  console.log("USER LOGIN API CALLED");
   try {
     const user = await User.findOne({
       username: req.body.username,
