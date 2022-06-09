@@ -5,6 +5,7 @@ const Post = require("../models/Post");
 const { default: mongoose } = require("mongoose");
 
 router.put("/:id", async (req, res) => {
+  console.log("USER UPDATE CALLED");
   if (req.body.userId === req.params.id) {
     if (req.body.password) {
       const salt = await bcyrpt.genSalt(10);
@@ -21,6 +22,7 @@ router.put("/:id", async (req, res) => {
 
       res.status(200).json(updatedUser);
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   } else {
@@ -53,11 +55,13 @@ router.delete("/:id", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
+  console.log("USER GET CALLED");
   try {
     const user = await User.findById(req.params.id);
     const { password, ...others } = user._doc;
     res.status(200).json(others);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
