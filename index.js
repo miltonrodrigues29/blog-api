@@ -7,6 +7,7 @@ const postRoute = require("./routes/posts");
 const categoryRoute = require("./routes/categories");
 const path = require("path");
 const multer = require("multer");
+const { get } = require("http");
 
 const app = express();
 const port = 5000;
@@ -43,7 +44,9 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/categories", categoryRoute);
-
-app.listen(port, () => {
+app.get("/", (req, res) => {
+  res.send(`Express server running on port ${port}`);
+});
+app.listen(process.env.PORT || port, () => {
   console.log(`Server listening at port ${port}`);
 });
